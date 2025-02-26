@@ -1,27 +1,28 @@
 name: CI/CI pipeline
 on:
   pull-request:
-    branches: ['master']
+    branches: ['main']
 
 jobs:
   CI:
-    name: Continous Integraiton
+    name: Continous Integration
     runs-on: ubuntu-latest
     steps:
-      - name: ✅ Checar código
-        uses: actions/checkout@v4 # Clona o repositório para ter acesso a pasta do projeto no servidor
+      - name: 📑 Checkout Code
+        uses: actions/checkout@v4 # Clona o repostório para ter acesso a pasta do projeto no servidor
 
-      - name: 🛠️ Configurar Node.js
-        uses: actions/setup-node@v4
+      - name: 📩 Set up Node.js
+        uses: actions/setup-node@v4 # Instala o node na versão 18
         with:
-          node-version: '18.13.0' #Instala versão do node
-      - name: Instalar dependências
+          node-version: '18.13.0'
+
+      - name: 📥 Installing Dependencies
         run: npm install
 
-      - name: 🧪 Executar testes
+      - name: 🧪 Testing
         run: npm run test
 
-       - name: 🧪 Construir
+      - name: 🏗️ Building
         run: npm run build
 
   CD:
@@ -37,5 +38,4 @@ jobs:
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
       - name: 🚀 Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
-
 
