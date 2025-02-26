@@ -1,0 +1,27 @@
+<table class="table table-dark table-hover w-100 mx-auto p-3">
+    <thead>
+      <tr>
+        <th scope="col">Código Fipe</th>
+        <th scope="col">Carro</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Ano do modelo</th>
+        <th scope="col">Mês de referência</th>
+        <th scope="col">Tipo de combustível</th>
+        <th scope="col">Valor</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(veiculo of vehicles(); track veiculo.codigoFipe){
+        <tr>
+          <th scope="row">{{veiculo.codigoFipe}}</th>
+          <td>{{veiculo.modelo}}</td>
+          <td>{{veiculo.marca}}</td>
+          <td>{{veiculo.anoModelo > actualYear ? actualYear : veiculo.anoModelo}}</td>
+          <td>{{veiculo.mesReferencia}}</td>
+          <td>{{veiculo.combustivel}}</td>
+          <td>{{veiculo.valor}}</td>
+        </tr>
+      }
+
+    </tbody>
+</table>
