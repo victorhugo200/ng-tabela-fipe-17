@@ -1,8 +1,8 @@
 name: CI/CI pipeline
+
+
 on:
   pull-request:
-    branches: ['main']
-  push:
     branches: ['main']
 
 jobs:
