@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
@@ -20,7 +19,6 @@ import { VehiclesService } from './shared/services/veiculo/vehicles.service';
     ReactiveFormsModule,
     FormsModule,
     MessageErrorComponent,
-    NgIf,
     FooterComponent,
     NgxMaskDirective,
     HeaderComponent,
