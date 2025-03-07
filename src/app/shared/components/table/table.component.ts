@@ -1,5 +1,6 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { Vehicle } from '../../../model/vehicle.model';
+import { ActualYearService } from '../../services/actual-year/actual-year.service';
 
 @Component({
   selector: 'fipe-table',
@@ -8,5 +9,6 @@ import { Vehicle } from '../../../model/vehicle.model';
 })
 export class TableComponent {
   vehicles = input<Vehicle[]>([]);
-  actualYear = new Date().getFullYear();
+  actualYearService = inject(ActualYearService);
+  actualYear = this.actualYearService.getYear();
 }
