@@ -1,58 +1,57 @@
+<fipe-header></fipe-header>
 <section class="fipe">
   <h1 class="h1 text-center mb-4">Descubra o valor do seu Automóvel</h1>
   <div class="container">
     <div class="d-flex flex-column align-items-center">
       <input
-        #inputRef
         type="text"
         class="form-control w-50 mx-auto"
         placeholder="Digite o código fipe do seu automóvel"
-        [value]="inputRef.value | formatFipe"
-        maxlength="8"
         [formControl]="fieldFipe"
+        mask="000000-0"
       />
 
-      <div *ngIf="fieldFipe.errors && fieldFipe.touched" class="text-center">
+      @if (fieldFipe.errors && fieldFipe.touched) {
+      <div class="text-center">
+        @if (fieldFipe.hasError('required')) {
         <fipe-message-error
-          *ngIf="fieldFipe.hasError('required')"
           [text]="'Campo obrigatório.'"
           class="my-2"
         ></fipe-message-error>
-
+        } @if (fieldFipe.hasError('minlength')) {
         <fipe-message-error
-          *ngIf="fieldFipe.hasError('minlength')"
-          [text]="'Você precisa digitar no mínimo 7 caracteres.'"
+          [text]="'Você precisa digitar no mínimo 7 números.'"
           class="my-2"
         ></fipe-message-error>
-
+        } @if (fieldFipe.hasError('pattern')) {
         <fipe-message-error
-          *ngIf="fieldFipe.hasError('pattern')"
           [text]="'Digite apenas números.'"
           class="my-2"
         ></fipe-message-error>
+        }
       </div>
+      }
     </div>
 
     <div class="fipe-grid mt-5">
-
-
-      <div *ngIf="loading" class="d-flex justify-content-center">
-        <div class="spinner-border" role="status" style="width: 3rem; height: 3rem;">
-          <span class="visually-hidden">Loading...</span>
-        </div>
+      @if (loading) {
+      <fipe-loader></fipe-loader>
+      } @else {
+      <div>
+        @if (hasError) {
+        <fipe-message-error
+          class="text-center"
+          [text]="
+            'Houve um erro ao consultar esse veículo. Verifique o código FIPE pesquisado.'
+          "
+        ></fipe-message-error>
+        } @else { @if (vehicles.length) {
+        <fipe-table [vehicles]="vehicles"></fipe-table>
+        } @else {
+        <p class="text-center">Não houve resultado para a sua busca.</p>
+        } }
       </div>
-
-      <div *ngIf="!loading">
-
-        <div *ngIf="hasError; else noError">
-          <fipe-message-error class="text-center" [text]="'Houve um erro ao consultar esse veículo. Verifique o código FIPE pesquisado.'"></fipe-message-error>
-        </div>
-        <ng-template #noError>
-          <fipe-table *ngIf="vehicles.length" [vehicles]="vehicles"></fipe-table>
-          <p *ngIf="!vehicles.length" class="text-center">Não houve resultado para a sua busca.</p>
-        </ng-template>
-      </div>
-
+      }
     </div>
   </div>
 </section>

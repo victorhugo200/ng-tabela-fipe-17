@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ActualYearService } from '../../shared/services/actual-year/actual-year.service';
 
 @Component({
   selector: 'fipe-footer',
@@ -7,7 +8,7 @@ import { Component } from '@angular/core';
     <footer class="bg-dark py-3">
       <div class="text-center">
         <span class="text-white "
-          >© {{ year }} Todos os direitos reservados | Desenvolvido por Victor
+          >© {{ actualYearService.getYear() }} Todos os direitos reservados | Desenvolvido por Victor
           Hugo.</span
         >
       </div>
@@ -24,5 +25,5 @@ import { Component } from '@angular/core';
     `]
 })
 export class FooterComponent {
-  year = new Date().getFullYear();
+  actualYearService = inject(ActualYearService);
 }

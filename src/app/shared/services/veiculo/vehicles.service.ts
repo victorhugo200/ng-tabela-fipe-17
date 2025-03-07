@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../../../environments/environment.development';
 import { Vehicle } from '../../../model/vehicle.model';
 
 @Injectable({
@@ -10,7 +11,7 @@ export class VehiclesService {
 
   getVehicles(codigoFipe: string) {
     return this.http.get<Vehicle[]>(
-      `https://brasilapi.com.br/api/fipe/preco/v1/${codigoFipe}`
+      `${environment.API_URL}${codigoFipe}`
     );
   }
 }
